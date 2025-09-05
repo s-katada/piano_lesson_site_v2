@@ -1,11 +1,14 @@
 ---
-import { Button } from "@/components/ui/button";
 import MainLayout from "@/layouts/main.astro";
+import Hero from "@/components/static/Hero.astro";
+import Features from "@/components/static/Features.astro";
+import CTA from "@/components/static/CTA.astro";
+import Map from "@/components/static/Map.astro";
 ---
 
-<MainLayout title="ピアノレッスンサイト">
-  <div class="grid place-items-center h-screen content-center">
-    <Button>Test</Button>
-    <a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-  </div>
+<MainLayout title="どんぐりピアノ教室 | 岐阜県中津川市のピアノ教室">
+  <Hero />
+  <Features />
+  <CTA />
+  <Map />
 </MainLayout>

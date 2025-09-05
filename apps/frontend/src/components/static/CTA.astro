@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  bgColor?: string;
+}
+
+const {
+  title = "まずは無料体験レッスンから",
+  description = "教室の雰囲気を感じていただき、あなたの目標をお聞かせください。<br />最適なレッスンプランをご提案いたします。",
+  buttonText = "無料体験レッスンを申し込む",
+  buttonHref = "/contact",
+  bgColor = "bg-primary/5",
+} = Astro.props;
+---
+
+<section class={`py-20 ${bgColor}`}>
+  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">
+      {title}
+    </h2>
+    <p class="text-lg text-gray-600 mb-8" set:html={description} />
+    <a
+      href={buttonHref}
+      class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md"
+    >
+      {buttonText}
+    </a>
+  </div>
+</section>

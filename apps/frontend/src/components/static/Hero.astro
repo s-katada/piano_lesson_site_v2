@@ -1,0 +1,30 @@
+---
+import "../../styles/hero.css";
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="/background.png" alt="森の中のピアノ" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
+  </div>
+  <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <h1
+      class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 animate-fade-in-up"
+    >
+      音楽で心を豊かに
+    </h1>
+    <p class="text-lg sm:text-xl text-white/90 mb-8 animate-fade-in-up animation-delay-200">
+      一人ひとりのペースに合わせた、温かく丁寧なレッスンで<br />
+      ピアノを弾く喜びをお伝えします
+    </p>
+  </div>
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>

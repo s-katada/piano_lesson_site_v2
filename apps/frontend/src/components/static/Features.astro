@@ -1,0 +1,42 @@
+---
+import { BookOpen, Clock, Music } from "lucide-astro";
+
+const features = [
+  {
+    title: "個人のペースに合わせたレッスン",
+    description: "初心者から上級者まで、一人ひとりの目標とペースに合わせて指導します",
+    Icon: BookOpen,
+  },
+  {
+    title: "柔軟なスケジュール",
+    description: "お仕事や学校のご都合に合わせて、レッスン時間を調整いたします",
+    Icon: Clock,
+  },
+  {
+    title: "幅広いジャンル",
+    description: "クラシックからポップスまで、お好きな曲を楽しく学べます",
+    Icon: Music,
+  },
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-serif font-bold text-center text-gray-900 mb-12">
+      どんぐりピアノ教室の特徴
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {
+        features.map((feature) => (
+          <div class="text-center group">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform group-hover:scale-110">
+              <feature.Icon class="w-8 h-8 text-primary stroke-primary" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
