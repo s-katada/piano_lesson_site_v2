@@ -1,0 +1,48 @@
+# Lefthook configuration
+# https://github.com/evilmartians/lefthook
+
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      run: bun run lint
+      stage_fixed: true
+
+    format:
+      run: bun run format
+      stage_fixed: true
+
+    build:
+      run: bun run build
+      skip:
+        - merge
+        - rebase
+
+commit-msg:
+  commands:
+    validate:
+      run: |
+        # コミットメッセージの検証
+        commit_regex='^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?: .{1,100}$'
+        if ! grep -qE "$commit_regex" "{1}"; then
+          echo "❌ コミットメッセージが規約に従っていません!"
+          echo ""
+          echo "正しい形式: <type>: <subject>"
+          echo ""
+          echo "Types:"
+          echo "  feat:     新機能"
+          echo "  fix:      バグ修正"
+          echo "  docs:     ドキュメント変更"
+          echo "  style:    フォーマット変更"
+          echo "  refactor: リファクタリング"
+          echo "  test:     テスト追加・修正"
+          echo "  chore:    ビルド・設定変更"
+          echo "  perf:     パフォーマンス改善"
+          echo ""
+          echo "例: feat: ユーザー認証機能を追加"
+          exit 1
+        fi
+
+skip_output:
+  - meta
+  - success
