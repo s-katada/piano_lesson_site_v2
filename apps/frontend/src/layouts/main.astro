@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import NavigationHeader from "@/components/islands/NavigationHeader";
+import Header from "@/components/static/Header.astro";
 import Footer from "@/components/static/Footer.astro";
 
 export interface Props {
@@ -18,7 +18,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen flex flex-col">
-    <NavigationHeader client:load />
+    <Header />
     <main class="flex-grow">
       <slot />
     </main>

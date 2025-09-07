@@ -1,0 +1,11 @@
+#mobile-menu-toggle:checked ~ #mobile-menu {
+  display: block;
+}
+
+#mobile-menu-toggle:checked ~ label .menu-icon {
+  display: none;
+}
+
+#mobile-menu-toggle:checked ~ label .close-icon {
+  display: block;
+}

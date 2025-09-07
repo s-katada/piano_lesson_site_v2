@@ -1,0 +1,77 @@
+---
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn-ui/card";
+import { Check } from "lucide-astro";
+
+const pricingPlans = [
+  {
+    title: "ベーシックコース",
+    description: "初心者・小学生の方向け",
+    price: "¥4,000",
+    features: ["月4回レッスン（1回30分）", "基礎から丁寧に指導", "簡単な曲を演奏できるように指導"],
+  },
+  {
+    title: "アドバンスコース",
+    description: "本格的に学びたい小学生から大人の方向け",
+    price: "¥5,000",
+    features: [
+      "月4回レッスン（1回50分）",
+      "個人のペースに合わせた指導",
+      "お好きな曲を演奏できるように指導",
+    ],
+  },
+];
+---
+
+<section class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-primary/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-serif font-bold text-gray-900 mb-4">料金プラン</h1>
+      <p class="text-lg text-gray-600">お子様から大人まで、目的に合わせて選べる2つのコース</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {
+        pricingPlans.map((plan) => (
+          <Card className="relative overflow-hidden">
+            <CardHeader>
+              <CardTitle>{plan.title}</CardTitle>
+              <CardDescription>{plan.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="flex items-baseline mb-6">
+                <span class="text-4xl font-bold text-gray-900">{plan.price}</span>
+                <span class="text-gray-600 ml-2">/月</span>
+              </div>
+              <ul class="space-y-3 mb-8">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start">
+                    <Check class="h-5 w-5 text-primary stroke-primary mr-2 mt-0.5 flex-shrink-0" />
+                    <span class="text-gray-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/contact"
+                class="block w-full text-center px-6 py-3 border border-primary text-primary bg-white hover:bg-primary hover:text-white transition-colors rounded-md font-medium"
+              >
+                このコースで始める
+              </a>
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-gray-600">
+        ※ 教材費は別途実費となるケースがあります<br />
+      </p>
+    </div>
+  </div>
+</section>

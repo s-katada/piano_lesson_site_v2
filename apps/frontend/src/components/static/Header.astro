@@ -1,0 +1,71 @@
+---
+import { Menu, X } from "lucide-astro";
+import "../../styles/header.css";
+
+const navigation = [
+  { name: "ホーム", href: "/" },
+  { name: "料金", href: "/pricing" },
+  { name: "講師紹介", href: "/instructor" },
+  { name: "お問い合わせ", href: "/contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed w-full top-0 z-50 bg-white/95 shadow-sm">
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 justify-between items-center">
+      <div class="flex items-center">
+        <a href="/" class="flex items-center">
+          <span class="text-xl font-serif font-bold text-gray-900">どんぐりピアノ教室</span>
+        </a>
+      </div>
+      <div class="hidden md:flex md:items-center md:space-x-1">
+        {
+          navigation.map((item) => (
+            <a
+              href={item.href}
+              class={`inline-flex items-center px-3 py-2 text-sm font-medium transition-colors ${
+                currentPath === item.href
+                  ? "text-primary font-semibold border-b-2 border-primary"
+                  : "text-gray-700 hover:text-primary"
+              }`}
+            >
+              {item.name}
+            </a>
+          ))
+        }
+      </div>
+      <input type="checkbox" id="mobile-menu-toggle" class="hidden" />
+      <label for="mobile-menu-toggle" class="md:hidden cursor-pointer">
+        <div class="menu-icon">
+          <Menu class="h-6 w-6 text-gray-700" />
+        </div>
+        <div class="close-icon hidden">
+          <X class="h-6 w-6 text-gray-700" />
+        </div>
+      </label>
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-16 left-0 right-0 bg-white shadow-lg md:hidden"
+      >
+        <div class="space-y-1 pb-3 pt-2">
+          {
+            navigation.map((item) => (
+              <a
+                href={item.href}
+                class={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium transition-colors ${
+                  currentPath === item.href
+                    ? "border-primary bg-primary/5 text-primary"
+                    : "border-transparent text-gray-700 hover:border-primary hover:bg-gray-50 hover:text-primary"
+                }`}
+              >
+                {item.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
