@@ -1,0 +1,90 @@
+---
+import MainLayout from "@/layouts/main.astro";
+import CTA from "@/components/static/CTA.astro";
+import { GraduationCap, Heart, Award, CheckCircle } from "lucide-astro";
+---
+
+<MainLayout title="講師紹介 | どんぐりピアノ教室">
+  <div class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-primary/10">
+    <div class="text-center mb-16">
+      <h1 class="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">講師紹介</h1>
+    </div>
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden mb-12">
+        <div class="grid lg:grid-cols-5 gap-0">
+          <div
+            class="lg:col-span-2 relative flex items-center justify-center p-8 lg:p-12 bg-gray-50"
+          >
+            <div class="relative">
+              <div class="absolute inset-0 bg-primary rounded-full blur-2xl opacity-20"></div>
+              <img
+                src="/instructor.png"
+                alt="片田香織先生"
+                class="relative w-64 h-64 lg:w-80 lg:h-80 object-cover rounded-full border-4 border-white shadow-2xl"
+              />
+            </div>
+          </div>
+          <div class="lg:col-span-3 p-8 lg:p-12">
+            <div class="text-center mb-6">
+              <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2">片田 香織</h2>
+              <p class="text-gray-600 gap-2">Kaori Katada</p>
+            </div>
+            <div class="space-y-6">
+              <div class="bg-primary/10 rounded-xl p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <GraduationCap class="w-5 h-5 text-primary" />
+                  <h3 class="font-bold text-primary">指導実績</h3>
+                </div>
+                <div class="text-sm text-gray-700 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <CheckCircle class="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span>指導歴20年以上</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <CheckCircle class="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span>総生徒数150名以上</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-primary/10 rounded-xl p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <Heart class="w-5 h-5 text-primary" />
+                  <h3 class="font-bold text-primary">指導理念・モットー</h3>
+                </div>
+                <div class="text-sm text-gray-700 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <CheckCircle class="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span>ピアノが楽しいと思えるようにしたい！</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <CheckCircle class="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span>生徒が弾きたい曲を演奏できるようにしたい！</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative mb-12">
+        <div class="absolute inset-0 bg-primary rounded-3xl opacity-10"></div>
+        <div class="relative bg-white rounded-3xl border border-gray-100 p-10">
+          <div class="flex items-center gap-3 mb-6">
+            <Award class="w-8 h-8 text-primary" />
+            <h3 class="text-xl font-serif font-bold text-gray-900">講師からのメッセージ</h3>
+          </div>
+          <blockquote class="text-gray-600 leading-relaxed">
+            私は、生徒さんが『ピアノって楽しい！』と心から思えるようなレッスンを心がけています。<br
+            />
+            「難しそうだな…」と感じる曲でも、その方のレベルに合わせて楽しくアレンジし、無理なく弾けるようにサポートします。<br
+            />
+            忙しい毎日でも、音楽の時間が良い気分転換になるように、レッスンは皆さんのご都合に合わせて柔軟に調整可能です。<br
+            />
+            ご気軽にご連絡ください！<br />
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <CTA />
+  </div>
+</MainLayout>
