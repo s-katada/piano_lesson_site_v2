@@ -1,6 +1,8 @@
 {
-  "name": "backend",
-  "type": "module",
+  "name": "@piano_lesson_site/backend",
+  "devDependencies": {
+    "wrangler": "^4.4.0"
+  },
   "scripts": {
     "dev": "wrangler dev",
     "build": "wrangler deploy --dry-run --outdir dist",
@@ -12,10 +14,8 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write ."
   },
+  "type": "module",
   "dependencies": {
-    "hono": "^4.9.6"
-  },
-  "devDependencies": {
-    "wrangler": "^4.4.0"
+    "@piano_lesson_site/shared": "workspace:*"
   }
 }

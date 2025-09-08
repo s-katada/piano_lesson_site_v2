@@ -2,7 +2,8 @@
   "name": "piano_lesson_site",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "dev": "bun run --filter '*' dev",

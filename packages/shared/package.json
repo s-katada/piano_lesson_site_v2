@@ -1,0 +1,21 @@
+{
+  "name": "@piano_lesson_site/shared",
+  "version": "1.0.0",
+  "module": "index.ts",
+  "main": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "types": "./index.ts"
+    }
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "hono": "^4.9.6",
+    "zod": "^4.1.5"
+  }
+}
