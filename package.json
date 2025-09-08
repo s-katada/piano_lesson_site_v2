@@ -10,8 +10,8 @@
     "preinstall": "lefthook install",
     "lint": "bun run --filter '*' lint",
     "lint:fix": "bun run --filter '*' lint:fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format": "bun run --filter '*' format",
+    "format:fix": "bun run --filter '*' format:fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
