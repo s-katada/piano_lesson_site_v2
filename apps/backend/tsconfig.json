@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
@@ -6,7 +7,13 @@
     "strict": true,
     "skipLibCheck": true,
     "lib": ["ESNext"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
-  }
+    "jsxImportSource": "hono/jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../../packages/shared/*"],
+      "@/*": ["./src/*"]
+    },
+    "composite": true
+  },
+  "include": ["src"]
 }

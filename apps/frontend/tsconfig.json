@@ -7,7 +7,9 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
+      "@shared/*": ["../../packages/shared/*"],
       "@/*": ["./src/*"]
-    }
+    },
+    "composite": true
   }
 }
