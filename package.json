@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "bun run --filter '*' dev",
     "build": "bun run --filter '*' build",
-    "preinstall": "lefthook install",
+    "prepare": "[ \"$CF_PAGES\" = \"1\" ] || [ \"$CI\" = \"true\" ] || lefthook install",
     "lint": "bun run --filter '*' lint",
     "lint:fix": "bun run --filter '*' lint:fix",
     "format": "bun run --filter '*' format",
