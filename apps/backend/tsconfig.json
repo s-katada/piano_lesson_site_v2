@@ -10,9 +10,9 @@
     "jsxImportSource": "hono/jsx",
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["../../packages/shared/*"],
-      "@/*": ["./src/*"]
+      "@shared/*": ["../../packages/shared/*"]
     },
+    "declaration": true,
     "composite": true
   },
   "include": ["src"]
