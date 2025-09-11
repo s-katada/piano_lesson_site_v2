@@ -1,5 +1,7 @@
+compatibility_date = "2025-09-05"
 name = "piano-lesson-site"
 pages_build_output_dir = "dist"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 BUN_VERSION = "1.2.15"
