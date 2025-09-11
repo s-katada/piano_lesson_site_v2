@@ -4,9 +4,34 @@ import Hero from "../components/static/Hero.astro";
 import Features from "../components/static/Features.astro";
 import CTA from "../components/static/CTA.astro";
 import Map from "../components/static/Map.astro";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MusicSchool",
+  name: "どんぐりピアノ教室",
+  description:
+    "岐阜県中津川市のピアノ教室。初心者から上級者まで、一人ひとりに合わせた丁寧な指導で楽しくピアノを学べます。",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "岐阜県",
+    addressLocality: "中津川市",
+  },
+  telephone: "",
+  priceRange: "¥¥",
+  openingHours: "Mo-Sa 09:00-20:00",
+  areaServed: {
+    "@type": "City",
+    name: "中津川市",
+  },
+};
 ---
 
-<MainLayout title="どんぐりピアノ教室 | 岐阜県中津川市のピアノ教室">
+<MainLayout
+  title="どんぐりピアノ教室 | 岐阜県中津川市のピアノ教室"
+  description="岐阜県中津川市のどんぐりピアノ教室。初心者から上級者まで、年齢問わず一人ひとりのペースに合わせた丁寧な指導。無料体験レッスン受付中。楽しくピアノを始めませんか？"
+  keywords="ピアノ教室,中津川市,岐阜県,どんぐりピアノ教室,ピアノレッスン,音楽教室,初心者歓迎,子供ピアノ,大人ピアノ,無料体験"
+  structuredData={structuredData}
+>
   <Hero />
   <Features />
   <CTA />

@@ -5,7 +5,11 @@ export const prerender = false;
 const contactType = Astro.url.searchParams.get("type") || "lesson";
 ---
 
-<MainLayout title="お問い合わせ | どんぐりピアノ教室">
+<MainLayout
+  title="お問い合わせ | どんぐりピアノ教室"
+  description="どんぐりピアノ教室へのお問い合わせ・体験レッスンのお申し込みはこちら。お気軽にご相談ください。岐阜県中津川市。"
+  keywords="お問い合わせ,体験レッスン,申し込み,ピアノ教室,中津川市,岐阜県,どんぐりピアノ教室,無料体験"
+>
   <div class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-primary/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">

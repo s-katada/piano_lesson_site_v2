@@ -6,8 +6,30 @@ import { Toaster } from "../components/shadcn-ui/sonner";
 
 export interface Props {
   title: string;
+  description?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  structuredData?: object;
 }
-const { title } = Astro.props;
+
+const {
+  title,
+  description = "岐阜県中津川市のどんぐりピアノ教室。初心者から上級者まで、一人ひとりに合わせた丁寧な指導で、楽しくピアノを学べます。無料体験レッスン受付中。",
+  keywords = "ピアノ教室,中津川市,岐阜県,ピアノレッスン,音楽教室,どんぐりピアノ教室,初心者,子供,大人",
+  ogTitle,
+  ogDescription,
+  ogImage = "/og-image.png",
+  canonicalURL,
+  structuredData,
+} = Astro.props;
+
+const siteURL = Astro.site || "https://donguri-piano.com";
+const pageURL = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
+const finalOgTitle = ogTitle || title;
+const finalOgDescription = ogDescription || description;
 ---
 
 <html lang="ja">
@@ -16,7 +38,30 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={pageURL} />
+
+    <meta property="og:title" content={finalOgTitle} />
+    <meta property="og:description" content={finalOgDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageURL} />
+    <meta property="og:image" content={new URL(ogImage, siteURL).href} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="どんぐりピアノ教室" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalOgTitle} />
+    <meta name="twitter:description" content={finalOgDescription} />
+    <meta name="twitter:image" content={new URL(ogImage, siteURL).href} />
+
+    {
+      structuredData && (
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+      )
+    }
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />

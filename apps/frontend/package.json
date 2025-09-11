@@ -17,6 +17,7 @@
     "@astrojs/cloudflare": "^12.6.8",
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.5.1",
     "@hookform/resolvers": "^5.2.1",
     "@piano_lesson_site/shared": "workspace:*",
     "@radix-ui/react-label": "^2.1.7",
