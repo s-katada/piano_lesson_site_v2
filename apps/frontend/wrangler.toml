@@ -1,0 +1,10 @@
+name = "donguri-piano-site-frontend"
+compatibility_date = "2025-09-05"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+PUBLIC_API_URL = "https://api.donguri-piano-site.com"
+
+
+[site]
+bucket = "piano-site-frontend"

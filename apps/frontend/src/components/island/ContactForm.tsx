@@ -16,7 +16,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
-import { type AppType } from "@piano_lesson_site/backend/src/index";
+import { type AppType } from "@piano_lesson_site/api";
 import {
   Select,
   SelectContent,
