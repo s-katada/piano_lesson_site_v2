@@ -1,0 +1,6 @@
+name = "piano-lesson-site"
+pages_build_output_dir = "dist"
+
+[vars]
+BUN_VERSION = "1.2.15"
+PUBLIC_API_URL = "https://api.donguri-piano.maropu.com"

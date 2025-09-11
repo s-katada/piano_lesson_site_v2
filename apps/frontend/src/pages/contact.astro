@@ -1,6 +1,8 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import { ContactForm } from "../components/island/ContactForm";
+export const prerender = false;
+const contactType = Astro.url.searchParams.get("type") || "lesson";
 ---
 
 <MainLayout title="お問い合わせ | どんぐりピアノ教室">
@@ -16,7 +18,7 @@ import { ContactForm } from "../components/island/ContactForm";
         <p class="text-gray-600 font-light text-center mb-8">
           以下のフォームに必要事項をご入力ください
         </p>
-        <ContactForm client:load />
+        <ContactForm client:load contactType={contactType} />
       </div>
     </div>
   </div>

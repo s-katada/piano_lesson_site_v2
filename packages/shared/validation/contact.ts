@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const CONTACT_TYPES = ["lesson", "trial", "other"] as const;
+export type ContactType = (typeof CONTACT_TYPES)[number];
+export const contactTypeLabels: Record<ContactType, string> = {
+  lesson: "レッスンのご相談",
+  trial: "体験レッスン申込",
+  other: "その他",
+} as const;
 export const contactSchema = z.object({
   name: z.string().min(1, "名前は必須です"),
   email: z.email("有効なメールアドレスを入力してください"),
@@ -11,14 +18,10 @@ export const contactSchema = z.object({
     )
     .optional()
     .or(z.literal("")),
-  contact_type: z.enum(["lesson", "trial", "other"]),
+  contact_type: z.enum(CONTACT_TYPES),
   content: z.string().min(1, "お問い合わせ内容は必須です"),
 });
-
 export type ContactFormData = z.infer<typeof contactSchema>;
-
-export const contactTypeLabels = {
-  lesson: "レッスンのご相談",
-  trial: "体験レッスン申込",
-  other: "その他",
-} as const;
+export const isValidContactType = (type: unknown): type is ContactType => {
+  return CONTACT_TYPES.includes(type as ContactType);
+};

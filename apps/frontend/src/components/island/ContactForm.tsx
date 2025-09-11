@@ -1,7 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { contactSchema, type ContactFormData } from "@piano_lesson_site/shared";
+import {
+  contactSchema,
+  type ContactFormData,
+  type ContactType,
+  contactTypeLabels,
+  isValidContactType,
+} from "@piano_lesson_site/shared";
 import { Button } from "../../components/shadcn-ui/button";
 import { Input } from "../../components/shadcn-ui/input";
 import { Textarea } from "../../components/shadcn-ui/textarea";
@@ -16,7 +22,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
-import { type AppType } from "@piano_lesson_site/backend/src/index";
+import { type AppType } from "@piano_lesson_site/api";
 import {
   Select,
   SelectContent,
@@ -34,15 +40,20 @@ import {
 } from "../../components/shadcn-ui/form";
 import { hc } from "hono/client";
 
-export function ContactForm() {
+interface ContactFormProps {
+  contactType?: string;
+}
+
+export function ContactForm({ contactType }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const validContactType: ContactType = isValidContactType(contactType) ? contactType : "lesson";
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",
       phone: "",
-      contact_type: "trial",
+      contact_type: validContactType,
       content: "",
     },
   });
@@ -184,9 +195,11 @@ export function ContactForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="lesson">レッスンのご相談</SelectItem>
-                  <SelectItem value="trial">体験レッスン申込</SelectItem>
-                  <SelectItem value="other">その他</SelectItem>
+                  {Object.entries(contactTypeLabels).map(([value, label]) => (
+                    <SelectItem key={value} value={value}>
+                      {label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
