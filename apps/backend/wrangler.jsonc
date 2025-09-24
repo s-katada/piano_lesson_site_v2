@@ -3,6 +3,9 @@
   "name": "piano-lesson-site-api",
   "main": "src/index.ts",
   "compatibility_date": "2025-09-05",
+  "vars": {
+    "BUN_VERSION": "1.2.21"
+  }
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
