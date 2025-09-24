@@ -4,5 +4,5 @@ pages_build_output_dir = "dist"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-BUN_VERSION = "1.2.15"
+BUN_VERSION = "1.2.21"
 PUBLIC_API_URL = "https://api.donguri-piano.maropu.com"
