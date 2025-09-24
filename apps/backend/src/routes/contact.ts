@@ -4,7 +4,7 @@ import { contactSchema, type ContactFormData } from "@piano_lesson_site/shared";
 import { DiscordWebhookService } from "../services/discord";
 import type { Bindings } from "../types/bindings";
 import { Resend } from "resend";
-
+import { contactEmailTemplate } from "../emails/template";
 export const contactRoutes = new Hono<{ Bindings: Bindings }>().post(
   "/",
   zValidator("json", contactSchema),
@@ -17,15 +17,10 @@ export const contactRoutes = new Hono<{ Bindings: Bindings }>().post(
       await discordService.sendContactNotification(data);
       const resend = new Resend(c.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: c.env.FROM_EMAIL,
+        from: `どんぐりピアノ教室 <${c.env.FROM_EMAIL}>`,
         to: data.email,
-        subject: "お問い合わせを受け付けました。",
-        html: `
-        <p>お問い合わせありがとうございます。</p>
-        <p>お問い合わせ内容を確認後、ご連絡させていただきます。</p>
-        <p>お手数ですが、しばらくお待ちください。</p>
-        <p>＊こちらは自動返信メールです。</p>
-        `,
+        subject: "お問い合わせを受け付けました！",
+        html: contactEmailTemplate().toString(),
       });
 
       return c.json(
