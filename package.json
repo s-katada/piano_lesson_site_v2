@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "bun run --filter '*' dev",
     "build": "bun run --filter '*' build",
+    "build:frontend": "bun run --filter '@piano_lesson_site/frontend' build",
+    "build:backend": "bun run --filter '@piano_lesson_site/backend' build",
     "prepare": "[ \"$CF_PAGES\" = \"1\" ] || [ \"$CI\" = \"true\" ] || lefthook install",
     "lint": "bun run --filter '*' lint",
     "lint:fix": "bun run --filter '*' lint:fix",
