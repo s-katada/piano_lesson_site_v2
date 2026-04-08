@@ -1,13 +1,12 @@
-# Astro with Tailwind
+# `@piano_lesson_site/frontend`
 
-```sh
-bun create astro@latest -- --template with-tailwindcss
+どんぐりピアノ教室サイトのフロントエンドです。Astro と React（アイランド）、Tailwind CSS で構成しています。
+
+## 開発
+
+```bash
+# リポジトリ直下から
+bun run --filter '@piano_lesson_site/frontend' dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/with-tailwindcss/devcontainer.json)
-
-Astro comes with [Tailwind](https://tailwindcss.com) support out of the box. This example showcases how to style your Astro project with Tailwind.
-
-For complete setup instructions, please see our [Tailwind Integration Guide](https://docs.astro.build/en/guides/integrations-guide/tailwind).
+環境変数・デプロイ・本番 URL はリポジトリ直下の [README.md](../../README.md) を参照してください。
