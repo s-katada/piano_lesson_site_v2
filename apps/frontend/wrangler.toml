@@ -6,5 +6,4 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 BUN_VERSION = "1.2.21"
 PUBLIC_API_URL = "https://api.donguri-piano.maropu.com"
-# Turnstile サイトキー（本番は Cloudflare で発行したキーに差し替え。テスト用: https://developers.cloudflare.com/turnstile/troubleshooting/testing/）
-PUBLIC_TURNSTILE_SITE_KEY = "1x00000000000000000000AA"
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAC2AfSB06_4GqBDw"
