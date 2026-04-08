@@ -1,3 +1,7 @@
 DISCORD_WEBHOOK_URL=
 CLIENT_URL=http://localhost:4321
 RESEND_API_KEY=
+FROM_EMAIL=
+# Cloudflare Turnstile のシークレット（本番はダッシュボードで発行したキーを wrangler secret に設定）
+# ローカル検証向けテストキー（常に success）: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA

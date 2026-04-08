@@ -3,4 +3,5 @@ export type Bindings = {
   CLIENT_URL: string;
   RESEND_API_KEY: string;
   FROM_EMAIL: string;
+  TURNSTILE_SECRET_KEY: string;
 };
