@@ -20,8 +20,10 @@ export const contactSchema = z.object({
     .or(z.literal("")),
   contact_type: z.enum(CONTACT_TYPES),
   content: z.string().min(1, "お問い合わせ内容は必須です"),
+  turnstileToken: z.string().min(1, "認証を完了してください"),
 });
 export type ContactFormData = z.infer<typeof contactSchema>;
+export type ContactPayload = Omit<ContactFormData, "turnstileToken">;
 export const isValidContactType = (type: unknown): type is ContactType => {
   return CONTACT_TYPES.includes(type as ContactType);
 };

@@ -5,12 +5,35 @@ import { DiscordWebhookService } from "../services/discord";
 import type { Bindings } from "../types/bindings";
 import { Resend } from "resend";
 import { contactEmailTemplate } from "../emails/template";
+import { verifyTurnstileToken } from "../services/turnstile";
+
 export const contactRoutes = new Hono<{ Bindings: Bindings }>().post(
   "/",
   zValidator("json", contactSchema),
   async (c) => {
     const webhookUrl = c.env.DISCORD_WEBHOOK_URL;
-    const data: ContactFormData = c.req.valid("json");
+    const body: ContactFormData = c.req.valid("json");
+    const { turnstileToken, ...data } = body;
+
+    const remoteip =
+      c.req.header("CF-Connecting-IP") ?? c.req.header("X-Forwarded-For")?.split(",")[0]?.trim();
+
+    const turnstile = await verifyTurnstileToken(
+      c.env.TURNSTILE_SECRET_KEY,
+      turnstileToken,
+      remoteip
+    );
+
+    if (!turnstile.success) {
+      console.error("Turnstile verification failed:", turnstile.errorCodes);
+      return c.json(
+        {
+          success: false,
+          message: "認証に失敗しました。ページを再読み込みして再度お試しください。",
+        },
+        403
+      );
+    }
 
     try {
       const discordService = new DiscordWebhookService(webhookUrl);

@@ -21,7 +21,8 @@ import {
   XCircle,
   AlertCircle,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { type AppType } from "@piano_lesson_site/backend/src/index";
 import {
   Select,
@@ -46,7 +47,9 @@ interface ContactFormProps {
 
 export function ContactForm({ contactType }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const validContactType: ContactType = isValidContactType(contactType) ? contactType : "lesson";
+  const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -55,8 +58,10 @@ export function ContactForm({ contactType }: ContactFormProps) {
       phone: "",
       contact_type: validContactType,
       content: "",
+      turnstileToken: "",
     },
   });
+  const turnstileToken = form.watch("turnstileToken");
   async function onSubmit(data: ContactFormData) {
     setIsSubmitting(true);
     try {
@@ -81,14 +86,30 @@ export function ContactForm({ contactType }: ContactFormProps) {
             },
           }
         );
-        form.reset();
+        form.reset({
+          name: "",
+          email: "",
+          phone: "",
+          contact_type: validContactType,
+          content: "",
+          turnstileToken: "",
+        });
+        turnstileRef.current?.reset();
       } else {
+        const errJson = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        const detail =
+          errJson?.message ??
+          (response.status === 403
+            ? "認証に失敗しました。ページを再読み込みして再度お試しください。"
+            : "時間をおいて再度お試しください");
         toast.error(
           <div className="flex items-center gap-2">
             <XCircle className="h-5 w-5 text-red-500" />
             <div>
               <p className="font-semibold">送信失敗</p>
-              <p className="text-sm text-gray-600">時間をおいて再度お試しください</p>
+              <p className="text-sm text-gray-600">{detail}</p>
             </div>
           </div>,
           {
@@ -99,6 +120,8 @@ export function ContactForm({ contactType }: ContactFormProps) {
             },
           }
         );
+        turnstileRef.current?.reset();
+        form.setValue("turnstileToken", "");
       }
     } catch (error) {
       console.error(error);
@@ -227,7 +250,37 @@ export function ContactForm({ contactType }: ContactFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {siteKey ? (
+          <div className="flex flex-col items-center gap-2">
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={siteKey}
+              onSuccess={(token) => {
+                form.setValue("turnstileToken", token, { shouldValidate: true });
+              }}
+              onExpire={() => {
+                form.setValue("turnstileToken", "", { shouldValidate: true });
+              }}
+              onError={() => {
+                form.setValue("turnstileToken", "", { shouldValidate: true });
+              }}
+            />
+            {form.formState.errors.turnstileToken ? (
+              <p className="text-sm text-destructive text-center">
+                {form.formState.errors.turnstileToken.message}
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <p className="text-center text-sm text-amber-800">
+            認証の設定が完了していません（PUBLIC_TURNSTILE_SITE_KEY）。
+          </p>
+        )}
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isSubmitting || !siteKey || !turnstileToken}
+        >
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

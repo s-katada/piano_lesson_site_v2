@@ -1,4 +1,4 @@
-import type { ContactFormData } from "@piano_lesson_site/shared";
+import type { ContactPayload } from "@piano_lesson_site/shared";
 import { contactTypeLabels } from "@piano_lesson_site/shared";
 
 export interface DiscordEmbed {
@@ -16,7 +16,7 @@ export interface DiscordEmbed {
 export class DiscordWebhookService {
   constructor(private webhookUrl: string) {}
 
-  async sendContactNotification(data: ContactFormData): Promise<void> {
+  async sendContactNotification(data: ContactPayload): Promise<void> {
     const embed: DiscordEmbed = {
       title: "新規お問い合わせ",
       description: `${data.name}さんから新規お問い合わせがありました。`,
@@ -25,7 +25,7 @@ export class DiscordWebhookService {
       fields: [
         { name: "名前", value: data.name, inline: true },
         { name: "メールアドレス", value: data.email, inline: true },
-        { name: "電話番号", value: data.phone, inline: true },
+        { name: "電話番号", value: data.phone?.trim() ? data.phone : "（未入力）", inline: true },
         {
           name: "お問い合わせ種類",
           value: contactTypeLabels[data.contact_type],
@@ -49,12 +49,13 @@ export class DiscordWebhookService {
     }
   }
 
-  private getColorByType(type: ContactFormData["contact_type"]): number {
+  private getColorByType(type: ContactPayload["contact_type"]): number {
     switch (type) {
-      case "inquiry":
+      case "lesson":
         return 0x3498db; // Blue
-      case "contact":
+      case "trial":
         return 0x2ecc71; // Green
+      case "other":
       default:
         return 0x95a5a6; // Gray
     }

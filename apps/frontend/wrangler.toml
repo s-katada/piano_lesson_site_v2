@@ -6,3 +6,4 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 BUN_VERSION = "1.2.21"
 PUBLIC_API_URL = "https://api.donguri-piano.maropu.com"
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAC2AfSB06_4GqBDw"
