@@ -14,7 +14,7 @@
 
 | 用途 | URL |
 |------|-----|
-| サイト | https://donguri-piano.com |
+| サイト | https://donguri-piano.maropu.com |
 | API | https://api.donguri-piano.maropu.com |
 
 ## 前提
