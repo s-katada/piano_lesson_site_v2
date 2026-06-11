@@ -9,3 +9,82 @@
 #mobile-menu-toggle:checked ~ label .close-icon {
   display: block;
 }
+
+#site-header {
+  --header-ink: var(--foreground);
+  --header-link: color-mix(in oklab, var(--foreground) 78%, transparent);
+  --header-accent: var(--primary);
+  background-color: color-mix(in srgb, var(--background) 90%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+#site-header[data-scrolled] {
+  box-shadow: 0 4px 24px rgb(63 54 46 / 0.07);
+}
+
+/* Transparent over the hero photo until the page is scrolled or the mobile menu opens */
+#site-header[data-overlay]:not([data-scrolled]):not(:has(#mobile-menu-toggle:checked)) {
+  --header-ink: #fff;
+  --header-link: rgb(255 255 255 / 0.82);
+  --header-accent: #fff;
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+#site-header .nav-link {
+  color: var(--header-link);
+}
+
+#site-header .nav-link:hover {
+  color: var(--header-accent);
+}
+
+#site-header .nav-link[data-active] {
+  color: var(--header-accent);
+}
+
+#site-header .nav-link[data-active]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--header-accent);
+}
+
+#site-header .header-cta {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: 1px solid transparent;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#site-header .header-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgb(63 54 46 / 0.2);
+}
+
+#site-header[data-overlay]:not([data-scrolled]):not(:has(#mobile-menu-toggle:checked)) .header-cta {
+  background-color: rgb(255 255 255 / 0.14);
+  border-color: rgb(255 255 255 / 0.5);
+  color: #fff;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}

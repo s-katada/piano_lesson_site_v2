@@ -278,7 +278,7 @@ export function ContactForm({ contactType }: ContactFormProps) {
         )}
         <Button
           type="submit"
-          className="w-full"
+          className="h-12 w-full rounded-full text-base font-bold"
           disabled={isSubmitting || !siteKey || !turnstileToken}
         >
           {isSubmitting ? (

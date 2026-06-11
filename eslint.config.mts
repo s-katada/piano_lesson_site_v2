@@ -5,7 +5,6 @@ import pluginReact from "eslint-plugin-react";
 import eslintConfigPrettier from "eslint-config-prettier";
 import prettierPlugin from "eslint-plugin-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
-import parser from "@typescript-eslint/parser";
 
 export default [
   {
@@ -79,6 +78,15 @@ export default [
     },
     rules: {
       "prettier/prettier": "error",
+    },
+  },
+  {
+    // eslint-plugin-astro extracts <script> blocks into virtual files that
+    // Prettier cannot parse; the .astro file itself is already formatted by
+    // prettier-plugin-astro.
+    files: ["**/*.astro/*.js", "**/*.astro/*.ts"],
+    rules: {
+      "prettier/prettier": "off",
     },
   },
   eslintConfigPrettier,

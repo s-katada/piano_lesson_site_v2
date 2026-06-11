@@ -1,6 +1,8 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import { ContactForm } from "../components/island/ContactForm";
+import { MapPin, Phone, Mail } from "lucide-astro";
+import AcornMark from "../components/static/AcornMark.astro";
 export const prerender = false;
 const contactType = Astro.url.searchParams.get("type") || "lesson";
 ---
@@ -10,19 +12,84 @@ const contactType = Astro.url.searchParams.get("type") || "lesson";
   description="どんぐりピアノ教室へのお問い合わせ・体験レッスンのお申し込みはこちら。お気軽にご相談ください。岐阜県中津川市。"
   keywords="お問い合わせ,体験レッスン,申し込み,ピアノ教室,中津川市,岐阜県,どんぐりピアノ教室,無料体験"
 >
-  <div class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-primary/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">お問い合わせ</h1>
-        <p class="text-gray-600">
-          体験レッスンのお申し込みやご質問など、お気軽にお問い合わせください
+  <div
+    class="bg-gradient-to-b from-accent/50 via-background to-background pb-20 pt-32 sm:pb-24 sm:pt-36"
+  >
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p
+          class="font-display text-xs font-bold uppercase tracking-[0.3em] text-primary sm:text-sm"
+        >
+          Contact
+        </p>
+        <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">お問い合わせ</h1>
+        <p class="mx-auto mt-5 max-w-2xl leading-7 text-balance text-muted-foreground">
+          <span class="inline-block">体験レッスンの</span><span class="inline-block"
+            >お申し込みや</span
+          ><span class="inline-block">ご質問など、</span><span class="inline-block">お気軽に</span
+          ><span class="inline-block">お問い合わせください</span>
         </p>
       </div>
-      <div class="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
-        <p class="text-gray-600 font-light text-center mb-8">
-          以下のフォームに必要事項をご入力ください
-        </p>
-        <ContactForm client:load contactType={contactType} />
+
+      <div class="mt-14 grid items-start gap-8 lg:grid-cols-[1fr_360px]">
+        <div
+          class="rounded-[2rem] border border-border/70 bg-card p-6 shadow-[0_16px_44px_rgb(63_54_46/0.08)] sm:p-10"
+        >
+          <ContactForm client:load contactType={contactType} />
+        </div>
+
+        <aside
+          class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest to-forest-deep p-8 text-cream shadow-[0_24px_60px_rgb(40_55_44/0.3)]"
+        >
+          <AcornMark
+            class="pointer-events-none absolute -bottom-6 -right-4 h-32 w-32 rotate-12 text-white/[0.08]"
+          />
+          <h2 class="font-display text-xl font-bold text-white">お電話・メールでもどうぞ</h2>
+          <p class="mt-3 text-sm leading-7 text-cream/75">
+            フォーム以外でも、お電話やメールで直接ご相談いただけます。
+          </p>
+          <ul class="mt-7 space-y-5">
+            <li>
+              <p
+                class="font-display text-[0.65rem] font-bold uppercase tracking-[0.25em] text-cream/55"
+              >
+                Tel
+              </p>
+              <a
+                href="tel:090-3934-4554"
+                class="mt-1.5 inline-flex items-center gap-2.5 font-display text-lg font-bold text-white transition-opacity hover:opacity-80"
+              >
+                <Phone class="h-4 w-4 text-[#e8c98a]" />
+                090-3934-4554
+              </a>
+            </li>
+            <li>
+              <p
+                class="font-display text-[0.65rem] font-bold uppercase tracking-[0.25em] text-cream/55"
+              >
+                Mail
+              </p>
+              <a
+                href="mailto:donguri@maropu.com"
+                class="mt-1.5 inline-flex items-center gap-2.5 text-sm font-medium text-white transition-opacity hover:opacity-80"
+              >
+                <Mail class="h-4 w-4 text-[#e8c98a]" />
+                donguri@maropu.com
+              </a>
+            </li>
+            <li>
+              <p
+                class="font-display text-[0.65rem] font-bold uppercase tracking-[0.25em] text-cream/55"
+              >
+                Address
+              </p>
+              <p class="mt-1.5 flex items-start gap-2.5 text-sm leading-6 text-cream/90">
+                <MapPin class="mt-0.5 h-4 w-4 shrink-0 text-[#e8c98a]" />
+                〒508-0203<br />岐阜県中津川市福岡510-32
+              </p>
+            </li>
+          </ul>
+        </aside>
       </div>
     </div>
   </div>

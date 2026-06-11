@@ -13,6 +13,7 @@ export interface Props {
   ogImage?: string;
   canonicalURL?: string;
   structuredData?: object;
+  transparentHeader?: boolean;
 }
 
 const {
@@ -21,9 +22,10 @@ const {
   keywords = "ピアノ教室,中津川市,岐阜県,ピアノレッスン,音楽教室,どんぐりピアノ教室,初心者,子供,大人",
   ogTitle,
   ogDescription,
-  ogImage = "/og-image.png",
+  ogImage = "/background.png",
   canonicalURL,
   structuredData,
+  transparentHeader = false,
 } = Astro.props;
 
 const siteURL = Astro.site || "https://donguri-piano.com";
@@ -35,14 +37,22 @@ const finalOgDescription = ogDescription || description;
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#faf6ef" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={pageURL} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta property="og:title" content={finalOgTitle} />
     <meta property="og:description" content={finalOgDescription} />
@@ -64,7 +74,7 @@ const finalOgDescription = ogDescription || description;
     }
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header />
+    <Header overlay={transparentHeader} />
     <main class="flex-grow">
       <slot />
     </main>

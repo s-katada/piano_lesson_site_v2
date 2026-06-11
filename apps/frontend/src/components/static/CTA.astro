@@ -1,4 +1,7 @@
 ---
+import { ArrowRight } from "lucide-astro";
+import AcornMark from "./AcornMark.astro";
+
 export interface Props {
   title?: string;
   description?: string;
@@ -8,25 +11,48 @@ export interface Props {
 }
 
 const {
-  title = "まずは無料体験レッスンから",
-  description = "教室の雰囲気を感じていただき、あなたの目標をお聞かせください。<br />最適なレッスンプランをご提案いたします。",
+  title = '<span class="inline-block">まずは</span><span class="inline-block">無料体験レッスンから</span>',
+  description = '<span class="inline-block">教室の雰囲気を</span><span class="inline-block">感じていただき、</span><span class="inline-block">あなたの目標を</span><span class="inline-block">お聞かせください。</span><br /><span class="inline-block">最適なレッスンプランを</span><span class="inline-block">ご提案いたします。</span>',
   buttonText = "無料体験レッスンを申し込む",
   buttonHref = "/contact?type=trial",
-  bgColor = "bg-primary/5",
+  bgColor = "bg-background",
 } = Astro.props;
 ---
 
-<section class={`py-20 ${bgColor}`}>
-  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">
-      {title}
-    </h2>
-    <p class="text-lg text-gray-600 mb-8" set:html={description} />
-    <a
-      href={buttonHref}
-      class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md"
+<section class={`py-20 sm:py-24 ${bgColor}`}>
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <div
+      class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest to-forest-deep px-6 py-14 text-center shadow-[0_24px_60px_rgb(40_55_44/0.3)] sm:px-12 sm:py-16"
     >
-      {buttonText}
-    </a>
+      <div
+        class="pointer-events-none absolute -left-20 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -bottom-28 -right-16 h-72 w-72 rounded-full bg-[#e8c98a]/15 blur-3xl"
+      >
+      </div>
+      <AcornMark
+        class="pointer-events-none absolute -bottom-7 -right-5 h-36 w-36 rotate-12 text-white/[0.08]"
+      />
+
+      <div class="relative">
+        <h2
+          class="font-display text-3xl font-bold text-balance text-white sm:text-4xl"
+          set:html={title}
+        />
+        <p
+          class="mx-auto mt-5 max-w-2xl leading-8 text-cream/85 sm:text-lg"
+          set:html={description}
+        />
+        <a
+          href={buttonHref}
+          class="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-cream px-8 py-4 text-sm font-bold text-forest-deep shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl sm:text-base"
+        >
+          {buttonText}
+          <ArrowRight class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
   </div>
 </section>

@@ -1,31 +1,73 @@
 ---
+import { ArrowRight, ChevronDown } from "lucide-astro";
 import "../../styles/hero.css";
 ---
 
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<section class="relative flex min-h-svh items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img src="/background.png" alt="森の中のピアノ" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
+    <img
+      src="/background.png"
+      alt="森の中に置かれたグランドピアノ"
+      class="animate-hero-zoom h-full w-full object-cover"
+      fetchpriority="high"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-[#1d1812]/60 via-[#1d1812]/25 to-[#1d1812]/60"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(20_16_10/0.4)_100%)]"
+    >
+    </div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent">
+    </div>
   </div>
-  <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+
+  <div class="relative z-10 mx-auto max-w-4xl px-4 pb-20 pt-24 text-center sm:px-6 lg:px-8">
+    <p
+      class="animate-fade-in-up font-display text-xs font-bold tracking-[0.35em] text-white/85 sm:text-sm"
+    >
+      岐阜県中津川市にある小さなピアノ教室
+    </p>
     <h1
-      class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 animate-fade-in-up"
+      class="animate-fade-in-up animation-delay-200 mt-6 font-display text-4xl font-bold leading-tight text-white [text-shadow:0_2px_28px_rgb(0_0_0/0.45)] sm:text-5xl md:text-6xl"
     >
       音楽で心を豊かに
     </h1>
-    <p class="text-sm sm:text-xl text-white/90 mb-8 animate-fade-in-up animation-delay-200">
-      岐阜県中津川市にある小さなピアノ教室です<br />
+    <p
+      class="animate-fade-in-up animation-delay-400 mt-7 text-sm leading-7 text-white/90 sm:text-base sm:leading-8 md:text-lg"
+    >
       本教室では楽しくピアノを弾くことを目指しています<br />
       初心者の方から経験者まで、どなたでもお気軽にお越しください
     </p>
+    <div
+      class="animate-fade-in-up animation-delay-600 mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+    >
+      <a
+        href="/contact?type=trial"
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-lg shadow-black/25 transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl sm:text-base"
+      >
+        無料体験レッスンを申し込む
+        <ArrowRight class="h-4 w-4" />
+      </a>
+      <a
+        href="/pricing"
+        class="inline-flex items-center justify-center rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:text-base"
+      >
+        料金プランを見る
+      </a>
+    </div>
   </div>
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
-  </div>
+
+  <a
+    href="#features"
+    aria-label="下へスクロール"
+    class="animate-drift absolute bottom-7 left-1/2 z-10 -translate-x-1/2"
+  >
+    <span
+      class="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20"
+    >
+      <ChevronDown class="h-5 w-5 text-white/90" />
+    </span>
+  </a>
 </section>
