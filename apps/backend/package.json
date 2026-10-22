@@ -16,8 +16,8 @@
   },
   "type": "module",
   "dependencies": {
-    "@hono/zod-validator": "^0.7.3",
+    "@hono/zod-validator": "^0.9.1",
     "@piano_lesson_site/shared": "workspace:*",
-    "resend": "^6.1.0"
+    "resend": "^6.34.1"
   }
 }
