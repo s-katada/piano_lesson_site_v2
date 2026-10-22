@@ -1,7 +1,7 @@
 {
   "name": "@piano_lesson_site/backend",
   "devDependencies": {
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.151.3"
   },
   "scripts": {
     "dev": "wrangler dev",
