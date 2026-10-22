@@ -19,7 +19,10 @@
 
 ## 前提
 
-- [Bun](https://bun.sh/)（このリポジトリは Bun で依存関係とスクリプトを管理しています）
+- [Nix](https://nixos.org/)（flakes 有効）と [direnv](https://direnv.net/)（[nix-direnv](https://github.com/nix-community/nix-direnv) 推奨）
+  - [`flake.nix`](flake.nix) の開発シェルが Node.js と [Bun](https://bun.sh/) を提供します。リポジトリ直下に入ると direnv が自動で読み込みます（初回のみ `direnv allow`）。
+  - 依存関係とスクリプトは Bun で管理しますが、astro・wrangler・eslint などの CLI は Node.js で動くため Node.js も必要です。
+- Nix を使わない場合は、`flake.nix` に書かれたバージョンの Node.js と Bun を手元に用意してください。
 
 ## 初回セットアップ
 
