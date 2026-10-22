@@ -5,7 +5,7 @@
 ## 技術スタック
 
 - **モノレポ**: Bun workspaces
-- **フロント**（`apps/frontend`）: Astro 5、React（アイランド）、Tailwind CSS、Radix UI、react-hook-form、Cloudflare Pages（`wrangler.toml` で `dist` をデプロイ）
+- **フロント**（`apps/frontend`）: Astro 7、React（アイランド）、Tailwind CSS、Radix UI、react-hook-form、Cloudflare Workers（`@astrojs/cloudflare` 14。`wrangler.toml` の `main` と `[assets]`、`wrangler deploy`）
 - **バックエンド**（`apps/backend`）: Hono、Cloudflare Workers、`wrangler deploy`
 - **共有**（`packages/shared`）: Zod でお問い合わせスキーマを定義し、フロントと API の両方から参照
 - **外部サービス**: Cloudflare Turnstile、Resend、Discord Incoming Webhook
@@ -43,7 +43,10 @@ cp apps/backend/.dev.vars.sample apps/backend/.dev.vars
 | `PUBLIC_API_URL` | お問い合わせ API のベース URL（ローカル例: `http://localhost:8787`） |
 | `PUBLIC_TURNSTILE_SITE_KEY` | Turnstile のサイトキー（公開してよい値） |
 
-ローカルでは `.env` を参照します。本番の Cloudflare Pages ではダッシュボードの環境変数、または [`apps/frontend/wrangler.toml`](apps/frontend/wrangler.toml) の `[vars]` でビルド時に注入できます（`PUBLIC_*` はビルド時に埋め込まれます）。
+`PUBLIC_*` はビルド時に埋め込まれます。本番（Cloudflare Workers）では [`apps/frontend/wrangler.toml`](apps/frontend/wrangler.toml) の `[vars]` がビルド時に読み込まれ、`PUBLIC_*` として使われます（`@astrojs/cloudflare` の挙動）。
+
+- `.env` や `.dev.vars` がある環境（ローカル）では、それらの値が `[vars]` より優先されます。
+- ダッシュボードのビルド変数に同名の値を設定しても、`[vars]` の値で上書きされます。環境ごとに値を変えたい場合は、`wrangler.toml` の `[env.<name>]` を使い、`CLOUDFLARE_ENV=<name>` を付けてビルドします。
 
 ### バックエンド（`apps/backend`）
 
@@ -80,6 +83,9 @@ bun run --filter '@piano_lesson_site/frontend' dev
 
 # API のみ（例）
 bun run --filter '@piano_lesson_site/backend' dev
+
+# フロントのビルド結果を Workers ランタイムで確認（astro build → astro preview）
+bun run --filter '@piano_lesson_site/frontend' preview
 ```
 
 ビルド:
@@ -91,7 +97,15 @@ bun run build:backend
 
 ## デプロイ
 
-- **フロント**: Astro の `dist` を Cloudflare Pages に載せる想定（[`apps/frontend/wrangler.toml`](apps/frontend/wrangler.toml) の `pages_build_output_dir` 参照）。CI やダッシュボードの手順に従ってください。
+- **フロント**: Cloudflare Workers（static assets 付き）にデプロイします。`astro build` が `dist/server`（Worker）と `dist/client`（静的ファイル）を生成し、`wrangler deploy` がビルドの出力した設定を参照します。
+
+```bash
+cd apps/frontend
+bun run deploy # astro build && wrangler deploy
+```
+
+Git 連携の自動ビルド（Workers Builds）を使う場合は、ビルド環境の `NODE_VERSION`（Astro 7 は 22.23.4 以上）と `BUN_VERSION` を、ダッシュボードのビルド変数で指定してください。
+
 - **バックエンド**:
 
 ```bash
